@@ -16,13 +16,13 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "serve -s dist/ -p 9001",
-    "dev": "lerna run dev --parallel",
+    "start": "node api.js && serve -s dist/",
+    "dev": "node api.js && lerna run dev --parallel",
     "postinstall": "lerna bootstrap",
     "format": "lerna run prettify --parallel",
     "lint": "concurrently yarn:lint:*",
     "lint:js": "eslint '**/*.+(js|jsx)'",
-    "build": "concurrently --kill-others-on-fail -m 1 \"yarn run clean\" \"lerna run build\"",
+    "build": "node api.js && concurrently --kill-others-on-fail -m 1 \"yarn run clean\" \"lerna run build\"",
     "prepare": "husky install",
     "clean": "yarn clean:build",
     "clean:build": "rimraf './dist'",
